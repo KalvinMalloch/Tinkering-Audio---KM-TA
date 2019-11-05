@@ -25,5 +25,5 @@ An element of procedurality is expected to vary the tones.
   
 #### Reason for choice:  
   
-  We decided to choose the MIT License as we don't mind any other third parties using, editing or distributing our code aslong as they include our orignal copyright and license notice. In short, we don't mind anyone using/taking inspiration from our code aslong as we are credited.  
+  We decided to choose the MIT License as we don't mind any other third parties using, editing or distributing our code aslong as they include our original copyright and license notice. In short, we don't mind anyone using/taking inspiration from our code aslong as we are credited.  
   
