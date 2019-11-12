@@ -11,12 +11,12 @@ using UnityEditor;
 public class AudioTinker : MonoBehaviour {
     private AudioSource audioSource;
     private AudioClip outAudioClip;
-    
-    
+   
+
     // Start is called before the first frame update
     void Start() {
         audioSource = GetComponent<AudioSource>();
-        outAudioClip = CreateToneAudioClip(900);
+        outAudioClip = CreateToneAudioClip(500);
         PlayOutAudio();
     }
     
@@ -27,8 +27,10 @@ public class AudioTinker : MonoBehaviour {
 
     }
 
+  
 
-    public void StopAudio() {
+    public void StopAudio() 
+    {
         audioSource.Stop();
     }
     
@@ -36,7 +38,7 @@ public class AudioTinker : MonoBehaviour {
     // Private 
     private AudioClip CreateToneAudioClip(int frequency) {
         int sampleDurationSecs = 5;
-        int sampleRate = 44100;
+        int sampleRate = 34100;
         int sampleLength = sampleRate * sampleDurationSecs;
         float maxValue = 1f / 4f;
         
@@ -53,7 +55,7 @@ public class AudioTinker : MonoBehaviour {
         return audioClip;
     }
 
-    
+/*
 #if UNITY_EDITOR
    // [Button("Save Wav file")]
     private void SaveWavFile() {
@@ -62,4 +64,5 @@ public class AudioTinker : MonoBehaviour {
         SaveWavUtil.Save(path, audioClip);
     }
 #endif
+*/
 }
