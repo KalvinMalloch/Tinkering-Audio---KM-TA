@@ -18,8 +18,6 @@ public class AudioTobyTest : MonoBehaviour
         PlayOutAudio();
         outAudioClip = CreateToneAudioClip(frequency2);
         PlayOutAudio();
-        //outAudioClip = CreateToneAudioClip(48);
-        //PlayOutAudio();
     }
 
     public void PlayOutAudio()
@@ -40,8 +38,14 @@ public class AudioTobyTest : MonoBehaviour
         float[] samples = new float[sampleLength];
         for (var i = 0; i < sampleLength; i++)
         {
+            // sine wave
             //float s = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));  
+
+            // square wave
             float s = Mathf.Sign(Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate)));
+
+
+            // testing sawtooth
             //float s = Mathf.Abs(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
 
         
