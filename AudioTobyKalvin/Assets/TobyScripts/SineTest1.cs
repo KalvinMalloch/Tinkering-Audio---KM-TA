@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioTobyTest : MonoBehaviour
+public class SineTest1 : MonoBehaviour
 {
     private AudioSource audioSource;
     private AudioClip outAudioClip;

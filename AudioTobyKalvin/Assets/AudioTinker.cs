@@ -37,7 +37,7 @@ public class AudioTinker : MonoBehaviour {
     
     // Private 
     private AudioClip CreateToneAudioClip(int frequency) {
-        int sampleDurationSecs = 5;
+        int sampleDurationSecs = 1;
         int sampleRate = 34100;
         int sampleLength = sampleRate * sampleDurationSecs;
         float maxValue = 1f / 4f;
