@@ -1882,7 +1882,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7c431cbf701544b9b9743b9692bf4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frequency: 90
+  frequency: 500
+  frequency2: 250
 --- !u!82 &1768923172
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1895,7 +1896,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.043
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2096,7 +2097,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1447608870}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 200
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
