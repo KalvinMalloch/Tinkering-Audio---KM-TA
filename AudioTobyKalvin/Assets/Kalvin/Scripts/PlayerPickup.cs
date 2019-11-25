@@ -6,6 +6,7 @@ public class PlayerPickup : MonoBehaviour
 {
 	private AudioSource audioSource;
     private AudioClip outAudioClip;
+	public float frequency;
 	
     void Start()
     {
@@ -27,9 +28,7 @@ public class PlayerPickup : MonoBehaviour
 
         float[] samples = new float[sampleLength];
         for (var i = 0; i < sampleLength; i++)
-        {
-			frequency = 700;
-			
+        {		
             float s = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
             float v = s * maxValue;
             samples[i] = v;
@@ -42,8 +41,19 @@ public class PlayerPickup : MonoBehaviour
 	{
 		if (other.gameObject.name == "Health") 
 		{
-			print ("test");
+			StartCoroutine(PickupSoundDelay());
+			Destroy (other.gameObject);
 		}
-		
 	}
+	
+	IEnumerator PickupSoundDelay()
+    {
+		frequency = 700;
+		outAudioClip = CreatePickupAudioClip(frequency);
+        audioSource.PlayOneShot(outAudioClip);
+		yield return new WaitForSeconds(0.15f);
+		frequency = 800;
+		outAudioClip = CreatePickupAudioClip(frequency);
+        audioSource.PlayOneShot(outAudioClip);
+    }
 }
