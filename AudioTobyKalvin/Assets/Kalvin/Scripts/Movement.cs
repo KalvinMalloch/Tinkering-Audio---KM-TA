@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Copyright MIT License 2019 K&T Team 27
+// Author: Kalvin Malloch
+
 public class Movement : MonoBehaviour
 {
 	private Rigidbody2D rig;
