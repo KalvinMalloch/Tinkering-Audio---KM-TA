@@ -22,6 +22,10 @@ navigating the user interface and configuring the game’s settings. This should
 be somewhat consistent across the interface, but the tones and samples
 should be modified in a systematic way to indicate success or failure. A variety
 of settings should be made available and configurable by a designer.  
+
+##### Instructions
+
+  Open the Unity project called AudioTobyKalvin. When opened, open the folder named Toby and locate the Scenes folder. Open the UIPeerReview scene to view and test my contract. The scripts used can be seen in the Scripts folder inside of the Toby folder.
   
 
 ## License  
