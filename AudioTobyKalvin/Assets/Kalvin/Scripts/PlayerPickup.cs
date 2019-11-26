@@ -17,8 +17,9 @@ public class PlayerPickup : MonoBehaviour
     {
         
     }
-	
-	private AudioClip CreatePickupAudioClip(float frequency)
+
+    // Creates the pickup audio clip with a short play length.
+    private AudioClip CreatePickupAudioClip(float frequency)
     {
         int sampleRate = 44100;
         int sampleLength = 10000;
@@ -37,6 +38,7 @@ public class PlayerPickup : MonoBehaviour
         return audioClip;
     }
 	
+    // Basic pickup script which starts the coroutine and deletes the game object when entering their trigger collider.
 	void OnTriggerEnter2D(Collider2D other) 
 	{
 		if (other.gameObject.name == "Health") 
@@ -46,6 +48,7 @@ public class PlayerPickup : MonoBehaviour
 		}
 	}
 	
+    // Creates two consecutive sounds with a short delay between both - with different frequencies.
 	IEnumerator PickupSoundDelay()
     {
 		frequency = 700;

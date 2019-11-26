@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
         Move();
     }
 	
+    // Basic movement script which starts the movement sound cycle coroutine if any of the movement keys are pressed down.
 	void Move()
 	{
 		float MoveH = Input.GetAxis ("Horizontal");
@@ -35,6 +36,7 @@ public class Movement : MonoBehaviour
         }
 	}
 	
+    // Creates the movement audio clip with a short play length.
 	private AudioClip CreateMovementAudioClip(float frequency)
     {
         int sampleRate = 44100;
@@ -54,6 +56,9 @@ public class Movement : MonoBehaviour
         return audioClip;
     }
 	
+    // Creates and initiates a new audio clip everytime the coroutine is ran. There's an if statement so that multiple audio clips
+    // don't overlap each other. Frequency is random between two values so that the footstep sound is different everytime.
+    // Short delay between the sound clips to give a foot step impression.
 	IEnumerator FootSoundDelay()
     {
 		if (walkSound == true) 
