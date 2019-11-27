@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Toby/Scenes/Contract4.unity
+    guid: 4ef529a3eea3f4548839f403a24dae0a
   m_configObjects: {}
