@@ -1,15 +1,17 @@
-﻿using System.Collections;
+﻿// Copyright MIT License 2019 K&T Team 27
+// Author: Kalvin Malloch
+// Link To Repository: https://github.com/KalvinMalloch/Tinkering-Audio---KM-TA
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-// Copyright MIT License 2019 K&T Team 27
-// Author: Kalvin Malloch
 
 public class Movement : MonoBehaviour
 {
 	private Rigidbody2D rig;
 	public float speed;
 	public float frequency;
+	public int sampleLength;
 	public bool walkSound;
 	private AudioSource audioSource;
     private AudioClip outAudioClip;
@@ -33,17 +35,26 @@ public class Movement : MonoBehaviour
 		float MoveV = Input.GetAxis ("Vertical");
 		Vector2 movement = new Vector2 (MoveH, MoveV);
 		rig.velocity = movement * speed;
-		if ((Input.GetKey("a")) || (Input.GetKey("w")) || (Input.GetKey("s")) || (Input.GetKey("d")))
+		if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
 			StartCoroutine(FootSoundDelay());
         }
 	}
 	
+	// Basic pickup script which starts the coroutine and deletes the game object when entering their trigger collider.
+	void OnTriggerEnter2D(Collider2D other) 
+	{
+		if (other.gameObject.name == "Health") 
+		{
+			StartCoroutine(PickupSoundDelay());
+			Destroy (other.gameObject);
+		}
+	}
+	
     // Creates the movement audio clip with a short play length.
-	private AudioClip CreateMovementAudioClip(float frequency)
+	private AudioClip CreateAudioClip(float frequency)
     {
         int sampleRate = 44100;
-        int sampleLength = 10000;
         float maxValue = 1f / 4f;
 
         var audioClip = AudioClip.Create("tone", sampleLength, 1, sampleRate, false);
@@ -67,11 +78,24 @@ public class Movement : MonoBehaviour
 		if (walkSound == true) 
 		{
 			walkSound = false;
+			sampleLength = 10000;
 			frequency = Random.Range(100, 200);
-			outAudioClip = CreateMovementAudioClip(frequency);
+			outAudioClip = CreateAudioClip(frequency);
             audioSource.PlayOneShot(outAudioClip);
 			yield return new WaitForSeconds(0.3f);
 			walkSound = true;
 		}
+    }
+	
+	// Creates two consecutive sounds with a short delay between both - with different frequencies.
+	IEnumerator PickupSoundDelay()
+    {
+		frequency = 700;
+		outAudioClip = CreateAudioClip(frequency);
+        audioSource.PlayOneShot(outAudioClip);
+		yield return new WaitForSeconds(0.15f);
+		frequency = 800;
+		outAudioClip = CreateAudioClip(frequency);
+        audioSource.PlayOneShot(outAudioClip);
     }
 }
