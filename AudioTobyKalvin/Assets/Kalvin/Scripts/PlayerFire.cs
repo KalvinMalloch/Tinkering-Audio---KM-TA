@@ -10,6 +10,7 @@ public class PlayerFire : MonoBehaviour
 {
 	public float fireRate;
     public float frequency;
+    public float frequency2;
     private float nextFire;
 	private float offset = 0.0f;
     public int sampleLength;
@@ -57,8 +58,9 @@ public class PlayerFire : MonoBehaviour
         float[] samples = new float[sampleLength];
         for (var i = 0; i < sampleLength; i++)
         {
-            float s = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
-            float v = s * maxValue;
+            float s1 = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
+            float s2 = Mathf.Sin(2.0f * Mathf.PI * frequency2 * ((float)i / (float)sampleRate));
+            float v = s1 + s2 * maxValue;
             samples[i] = v;
         }
         audioClip.SetData(samples, 0);

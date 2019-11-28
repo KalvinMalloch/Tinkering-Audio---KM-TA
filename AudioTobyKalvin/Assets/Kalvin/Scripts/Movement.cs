@@ -46,10 +46,21 @@ public class Movement : MonoBehaviour
 	{
 		if (other.gameObject.name == "Health") 
 		{
-			StartCoroutine(PickupSoundDelay());
+			StartCoroutine(HealthSoundDelay());
 			Destroy (other.gameObject);
 		}
-	}
+        if (other.gameObject.name == "Coin")
+        {
+
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.name == "Bullet")
+        {
+            StartCoroutine(DamageSoundDelay());
+            Destroy(other.gameObject);
+        }
+
+    }
 	
     // Creates the movement audio clip with a short play length.
 	private AudioClip CreateAudioClip(float frequency)
@@ -78,7 +89,6 @@ public class Movement : MonoBehaviour
 		if (walkSound == true) 
 		{
 			walkSound = false;
-			sampleLength = 10000;
 			frequency = Random.Range(100, 200);
 			outAudioClip = CreateAudioClip(frequency);
             audioSource.PlayOneShot(outAudioClip);
@@ -88,7 +98,7 @@ public class Movement : MonoBehaviour
     }
 	
 	// Creates two consecutive sounds with a short delay between both - with different frequencies.
-	IEnumerator PickupSoundDelay()
+	IEnumerator HealthSoundDelay()
     {
 		frequency = 700;
 		outAudioClip = CreateAudioClip(frequency);
@@ -96,6 +106,17 @@ public class Movement : MonoBehaviour
 		yield return new WaitForSeconds(0.15f);
 		frequency = 800;
 		outAudioClip = CreateAudioClip(frequency);
+        audioSource.PlayOneShot(outAudioClip);
+    }
+
+    IEnumerator DamageSoundDelay()
+    {
+        frequency = 400;
+        outAudioClip = CreateAudioClip(frequency);
+        audioSource.PlayOneShot(outAudioClip);
+        yield return new WaitForSeconds(0.15f);
+        frequency = 250;
+        outAudioClip = CreateAudioClip(frequency);
         audioSource.PlayOneShot(outAudioClip);
     }
 }

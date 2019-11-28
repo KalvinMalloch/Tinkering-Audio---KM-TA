@@ -241,7 +241,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.023555279, y: 0.00785172}
@@ -788,7 +788,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.14606628, y: -0.02577698}
@@ -970,7 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   frequency: 50
-  sampleLength: 0
+  sampleLength: 10000
   walkSound: 0
 --- !u!50 &765156774
 Rigidbody2D:
@@ -1084,7 +1084,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1262,7 +1262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 2
-  frequency: 500
+  frequency: 1600
+  frequency2: 1500
   sampleLength: 10000
   bulletPrefab: {fileID: 3966963053115416481, guid: 2b99297d1b9659b45b3bbb1bbd1eff69,
     type: 3}
