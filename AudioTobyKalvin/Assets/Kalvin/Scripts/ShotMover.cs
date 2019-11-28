@@ -6,27 +6,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotMover : MonoBehaviour {
-
-	public float speed;
-	private Rigidbody2D rig;
-
-	void Start () 
+public class ShotMover : MonoBehaviour 
+{
+    private void Awake()
     {
-		rig = GetComponent<Rigidbody2D> ();
-		rig.AddForce(transform.right * speed);
-	}
+        Destroy(gameObject, 2);
+    }
 
-	void OnTriggerEnter2D(Collider2D other) 
+    private void OnTriggerEnter2D(Collider2D other) 
     {
 		if (other.gameObject.name == "Gamespace") 
         {
 			Destroy (gameObject);
 		}
-	}
-
-	void Awake() 
-    {
-		Destroy (gameObject, 2);
 	}
 }

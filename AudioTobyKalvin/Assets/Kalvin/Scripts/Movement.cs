@@ -6,55 +6,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TAGS
+{
+    BULLET,
+    HEALTH,
+    COIN,
+}
+
 public class Movement : MonoBehaviour
 {
-	public float speed;
-	public float frequency;
-	public int sampleLength;
-	public bool walkSound;
-    private Rigidbody2D rig;
+    [Header("Sound Attributes")]
+    public float frequency;
+    public int sampleLength;
+
     private AudioSource audioSource;
     private AudioClip outAudioClip;
-	
-    void Start()
+
+    [Header("Movement Attributes")]
+    public float speed;
+    public bool walkSound;
+    private Rigidbody2D rigidBody;
+    
+
+    private void Start()
     {
-        rig = GetComponent<Rigidbody2D> ();
+        rigidBody = GetComponent<Rigidbody2D>();
 		audioSource = GetComponent<AudioSource>();
 		walkSound = true;
     }
 
-    void Update()
+    private void Update()
     {
         Move();
     }
 	
     // Basic movement script which starts the movement sound cycle coroutine if any of the movement keys are pressed down.
-	void Move()
+	private void Move()
 	{
-		float MoveH = Input.GetAxis ("Horizontal");
-		float MoveV = Input.GetAxis ("Vertical");
-		Vector2 movement = new Vector2 (MoveH, MoveV);
-		rig.velocity = movement * speed;
-		if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+		float moveH = Input.GetAxis("Horizontal");
+		float moveV = Input.GetAxis("Vertical");
+
+		Vector2 movement = new Vector2 (moveH, moveV);
+		rigidBody.velocity = movement * speed;
+
+		if (moveH != 0 || moveV != 0)
         {
 			StartCoroutine(FootSoundDelay());
         }
 	}
 	
 	// Basic pickup script which starts the coroutine and deletes the game object when entering their trigger collider.
-	void OnTriggerEnter2D(Collider2D other) 
+	private void OnTriggerEnter2D(Collider2D other) 
 	{
-		if (other.gameObject.name == "Health") 
+		if (other.CompareTag(TAGS.HEALTH.ToString())) 
 		{
 			StartCoroutine(HealthSoundDelay());
 			Destroy (other.gameObject);
 		}
-        if (other.gameObject.name == "Coin")
+        if (other.CompareTag(TAGS.COIN.ToString()))
         {
 
             Destroy(other.gameObject);
         }
-        if (other.gameObject.name == "Bullet")
+        if (other.CompareTag(TAGS.BULLET.ToString()))
         {
             StartCoroutine(DamageSoundDelay());
             Destroy(other.gameObject);
@@ -84,7 +98,7 @@ public class Movement : MonoBehaviour
     // Creates and initiates a new audio clip everytime the coroutine is ran. There's an if statement so that multiple audio clips
     // don't overlap each other. Frequency is random between two values so that the footstep sound is different everytime.
     // Short delay between the sound clips to give a foot step impression.
-	IEnumerator FootSoundDelay()
+	private IEnumerator FootSoundDelay()
     {
 		if (walkSound == true) 
 		{
@@ -98,7 +112,7 @@ public class Movement : MonoBehaviour
     }
 	
 	// Creates two consecutive sounds with a short delay between both - with different frequencies.
-	IEnumerator HealthSoundDelay()
+	private IEnumerator HealthSoundDelay()
     {
 		frequency = 700;
 		outAudioClip = CreateAudioClip(frequency);
@@ -109,7 +123,7 @@ public class Movement : MonoBehaviour
         audioSource.PlayOneShot(outAudioClip);
     }
 
-    IEnumerator DamageSoundDelay()
+    private IEnumerator DamageSoundDelay()
     {
         frequency = 400;
         outAudioClip = CreateAudioClip(frequency);

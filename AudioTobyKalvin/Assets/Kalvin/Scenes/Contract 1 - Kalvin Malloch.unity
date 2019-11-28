@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 266280834}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: COIN
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 302563210}
   m_Layer: 0
   m_Name: Health
-  m_TagString: Untagged
+  m_TagString: HEALTH
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 520537890}
   m_Layer: 0
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: BULLET
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -968,9 +968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3f12d3a9cf515409fb8348f3a017e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
   frequency: 50
   sampleLength: 10000
+  speed: 3
   walkSound: 0
 --- !u!50 &765156774
 Rigidbody2D:
@@ -1262,12 +1262,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 2
-  frequency: 1600
-  frequency2: 1500
-  sampleLength: 10000
+  bulletSpeed: 5
   bulletPrefab: {fileID: 3966963053115416481, guid: 2b99297d1b9659b45b3bbb1bbd1eff69,
     type: 3}
   bulletSpawn: {fileID: 1363426931}
+  frequency: 1600
+  secondaryFrequency: 0
+  sampleLength: 10000
 --- !u!82 &1363426933
 AudioSource:
   m_ObjectHideFlags: 0
