@@ -8,12 +8,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-	private Rigidbody2D rig;
 	public float speed;
 	public float frequency;
 	public int sampleLength;
 	public bool walkSound;
-	private AudioSource audioSource;
+    private Rigidbody2D rig;
+    private AudioSource audioSource;
     private AudioClip outAudioClip;
 	
     void Start()

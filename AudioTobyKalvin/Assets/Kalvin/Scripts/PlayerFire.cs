@@ -1,30 +1,67 @@
-﻿using System.Collections;
+﻿// Copyright MIT License 2019 K&T Team 27
+// Author: Kalvin Malloch
+// Link To Repository: https://github.com/KalvinMalloch/Tinkering-Audio---KM-TA
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFire : MonoBehaviour {
-	public GameObject bulletPrefab;
-	public Transform bulletSpawn;
+public class PlayerFire : MonoBehaviour 
+{
 	public float fireRate;
-	private float nextFire;
+    public float frequency;
+    private float nextFire;
 	private float offset = 0.0f;
-	public AudioClip playerFire;
-	public AudioSource audio;
+    public int sampleLength;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+    private AudioSource audioSource;
+    private AudioClip outAudioClip;
 
-	void Start () {
-		audio = GetComponent<AudioSource> ();
+    void Start () 
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+	void Update () 
+    {
+        PointToMouse();
+        FireGun();
 	}
 
-	void Update () {
-		Vector3 difference = Camera.main.ScreenToWorldPoint (Input.mousePosition) - transform.position;
-		difference.Normalize ();
-		float rotation_z = Mathf.Atan2 (difference.y, difference.x) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.Euler (0f, 0f, rotation_z + offset);
-		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
-			audio.PlayOneShot (playerFire);
-			nextFire = Time.time + fireRate;
-			Instantiate (bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-		}
-		
-	}
+    void PointToMouse()
+    {
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, rotation_z + offset);
+    }
+
+    void FireGun()
+    {
+        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        {
+            outAudioClip = CreateAudioClip(frequency);
+            audioSource.PlayOneShot(outAudioClip);
+            nextFire = Time.time + fireRate;
+            Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        }
+    }
+
+    private AudioClip CreateAudioClip(float frequency)
+    {
+        int sampleRate = 44100;
+        float maxValue = 1f / 4f;
+
+        var audioClip = AudioClip.Create("tone", sampleLength, 1, sampleRate, false);
+
+        float[] samples = new float[sampleLength];
+        for (var i = 0; i < sampleLength; i++)
+        {
+            float s = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
+            float v = s * maxValue;
+            samples[i] = v;
+        }
+        audioClip.SetData(samples, 0);
+        return audioClip;
+    }
 }
