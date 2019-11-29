@@ -12,15 +12,16 @@ using UnityEngine;
 /// </summary>
 public class Menus : MonoBehaviour
 {
-
     // Initialising game object variables for switching UI on/off
-
     private GameObject title;
     private GameObject storeButton;
     private GameObject storeGroup;
     private GameObject optionsGroup;
 
-
+    /// <summary>
+    /// Assigns each GameObject variable to the correct objects in scene
+    /// and sets the options and store UI as inactive to show title screen.
+    /// </summary>
     void Start()
     {
         // Assinging the game object variables to the correct UI groups in scene
@@ -34,33 +35,32 @@ public class Menus : MonoBehaviour
         optionsGroup.SetActive(false);
     }
 
-
-    void Update()
-    {
-        
-    }
-
-
-    // Public function for when player presses the options button
+    /// <summary>
+    /// Sets store UI as inactive and options UI as
+    /// active when Options button pressed.
+    /// </summary>
     public void OptionsButtonPressed()
     {
-        // Setting old UI as inactive
+        // Setting store UI inactive
         storeGroup.SetActive(false);
 
-        // Setting new UI as active 
+        // Setting options UI active
         storeButton.SetActive(true);
         optionsGroup.SetActive(true);
     }
 
-    // Public function for when player presses the store button
+    /// <summary>
+    /// Sets Options Ui as inactive and store UI
+    /// as activce when Store button pressed.
+    /// </summary> 
     public void StoreButtonPressed()
     {
-        // Setting old UI as inactive
+        // Setting options UI inactive
         title.SetActive(false);
         storeButton.SetActive(false);
         optionsGroup.SetActive(false);
 
-        // Setting new UI as active 
+        // Setting store UI active
         storeGroup.SetActive(true);
     }
 

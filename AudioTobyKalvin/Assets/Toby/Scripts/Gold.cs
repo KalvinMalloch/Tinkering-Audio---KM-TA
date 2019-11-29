@@ -19,7 +19,7 @@ public class Gold : MonoBehaviour
 
     // Amount of gold added each time the Add Gold button is pressed
     [SerializeField]
-    private int goldToAdd;
+    private int goldToAdd = 10;
 
     // The Text component so we can update the UI showing gold amount
     private Text goldText;
@@ -28,7 +28,8 @@ public class Gold : MonoBehaviour
     private AudioPlayer audioPlayerScript;
 
     /// <summary>
-    /// Gets the Text component and updates it.
+    /// Gets the Text component and updates it on startup.
+    /// Also finds the AudioPlayer script in Canvas.
     /// </summary>
     void Start()
     {
@@ -60,7 +61,9 @@ public class Gold : MonoBehaviour
 
     /// <summary>
     /// Checks if item can be bought and removes gold/plays sound accordingly.
+    /// Includes a parameter for amount of gold item costs.
     /// </summary>
+    /// <param name="amount"></param>
     public void RemoveGold(int amount)
     {
         // If statement checks if item costs more than gold user has
