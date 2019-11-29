@@ -21,7 +21,7 @@ public class AudioPlayer : MonoBehaviour
 
     // Frequency variables that hold the Hz amount in posotive and negative sounds
     private float posotiveFrequency = 100;
-    private float negativeFrequency = 35;
+    private float negativeFrequency = 55;
 
     // Addjustable float for how loud the sounds will be
     private float volumePercentage = 0.5f;
