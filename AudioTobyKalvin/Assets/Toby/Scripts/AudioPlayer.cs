@@ -15,8 +15,8 @@ public class AudioPlayer : MonoBehaviour
     private AudioClip outAudioClip;
     public float frequency;
 
-    public float posotiveFrequency;
-    public float negativeFrequency;
+    private float posotiveFrequency = 100;
+    private float negativeFrequency = 35;
     private bool frequencyRecentlyChanged;
 
     //volume
@@ -27,7 +27,11 @@ public class AudioPlayer : MonoBehaviour
     //waves 
     enum WaveType { Sine, Sqaure };
     WaveType currentSelectedwave;
-    public bool waveRecentlyChanged;
+    private bool waveRecentlyChanged;
+
+    private int summativeWaveLevel = 0;
+
+
 
 
 
@@ -138,7 +142,7 @@ public class AudioPlayer : MonoBehaviour
         }
         else
         {
-            outAudioClip = CreateAudioWave((negativeFrequency * 0.8f), 0.45f);
+            outAudioClip = CreateAudioWave((negativeFrequency * 0.7f), 0.45f);
         }
         audioSource.PlayOneShot(outAudioClip);
     }
@@ -149,7 +153,7 @@ public class AudioPlayer : MonoBehaviour
         if(!frequencyRecentlyChanged)
         {
             StartCoroutine(PosotiveSound());
-            StartCoroutine(FrequencyChangedDelay());
+            StartCoroutine(FrequencyChangedDelay(0.25f));
         }
     }
 
@@ -159,15 +163,21 @@ public class AudioPlayer : MonoBehaviour
         if (!frequencyRecentlyChanged)
         {
             StartCoroutine(NegativeSound());
-            StartCoroutine(FrequencyChangedDelay());
+            StartCoroutine(FrequencyChangedDelay(0.75f));
         }
     }
 
-    private IEnumerator FrequencyChangedDelay()
+    private IEnumerator FrequencyChangedDelay(float delayLength)
     {
         frequencyRecentlyChanged = true;
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(delayLength);
         frequencyRecentlyChanged = false;
+    }
+
+    public void ChangedSummativeWaveAmount(int newSummativeWaveAmount)
+    {
+        summativeWaveLevel = newSummativeWaveAmount;
+        StartCoroutine(PosotiveSound());
     }
 
 
@@ -186,22 +196,33 @@ public class AudioPlayer : MonoBehaviour
         float[] samples = new float[sampleLength];
         for (var i = 0; i < sampleLength; i++)
         {
-            float s;
+            float s = 0;
+            float s1 = 0;
+            float s2 = 0;
+            float s3 = 0;
             // Generates the Sine Wave
             if(currentSelectedwave == WaveType.Sine)
             {
-                s = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
+                if(summativeWaveLevel == 0)
+                {
+                    s1 = Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate));
+                    s = s1;
+                }
+                if (summativeWaveLevel >= 1)
+                {
+                    s2 = Mathf.Sin(2.0f * (Mathf.PI * 6) * (frequency * 0.8f) * ((float)i / (float)sampleRate));
+                    s += s2;
+                }
+                if (summativeWaveLevel >= 2)
+                {
+                    s3 = Mathf.Sin(2.0f * (Mathf.PI * 9) * (frequency * 0.6f) * ((float)i / (float)sampleRate));
+                    s += s3;
+                }
             }
             else
             {
                 s = Mathf.Sign(Mathf.Sin(2.0f * Mathf.PI * frequency * ((float)i / (float)sampleRate)));
             }
-
-           
-
-
-
-
 
             float v = s * maxValue;
             samples[i] = v;

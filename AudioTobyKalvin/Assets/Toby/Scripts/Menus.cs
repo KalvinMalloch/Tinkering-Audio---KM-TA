@@ -6,6 +6,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Menus Class.
+/// Allows user to switch between Options and Store area using UI.
+/// </summary>
 public class Menus : MonoBehaviour
 {
 
