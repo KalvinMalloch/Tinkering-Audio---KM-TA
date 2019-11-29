@@ -1266,8 +1266,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3966963053115416481, guid: 2b99297d1b9659b45b3bbb1bbd1eff69,
     type: 3}
   bulletSpawn: {fileID: 1363426931}
-  frequency: 1600
-  secondaryFrequency: 0
+  frequency: 400
+  secondaryFrequency: 300
   sampleLength: 10000
 --- !u!82 &1363426933
 AudioSource:
@@ -1281,7 +1281,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -1,6 +1,10 @@
-﻿// Copyright MIT License 2019 K&T Team 27
-// Author: Kalvin Malloch
+﻿// MIT License Copyright (c) 2019.
+// <author>Kalvin Malloch</author>
 // Link To Repository: https://github.com/KalvinMalloch/Tinkering-Audio---KM-TA
+// <summary>
+// Handles the movement of the player and the sound generation with the interaction
+// with other game objects.
+// </summary>
 
 using System.Collections;
 using System.Collections.Generic;
@@ -40,7 +44,9 @@ public class Movement : MonoBehaviour
         Move();
     }
 	
-    // Basic movement script which starts the movement sound cycle coroutine if any of the movement keys are pressed down.
+    /// <summary>
+    /// Uses the preset axis to enable movement for the player.
+    /// </summary>
 	private void Move()
 	{
 		float moveH = Input.GetAxis("Horizontal");
@@ -54,9 +60,15 @@ public class Movement : MonoBehaviour
 			StartCoroutine(FootSoundDelay());
         }
 	}
-	
-	// Basic pickup script which starts the coroutine and deletes the game object when entering their trigger collider.
-	private void OnTriggerEnter2D(Collider2D other) 
+
+    /// <summary>
+    /// Detects any game objects in the player's collider.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <remarks>
+    /// Other refers to whatever the other game object is that is in the collider.
+    /// </remarks>
+    private void OnTriggerEnter2D(Collider2D other) 
 	{
 		if (other.CompareTag(TAGS.HEALTH.ToString())) 
 		{
@@ -65,7 +77,6 @@ public class Movement : MonoBehaviour
 		}
         if (other.CompareTag(TAGS.COIN.ToString()))
         {
-
             Destroy(other.gameObject);
         }
         if (other.CompareTag(TAGS.BULLET.ToString()))
@@ -73,10 +84,15 @@ public class Movement : MonoBehaviour
             StartCoroutine(DamageSoundDelay());
             Destroy(other.gameObject);
         }
-
     }
 	
-    // Creates the movement audio clip with a short play length.
+    /// <summary>
+    /// The function that creates the audio clip when called upon, includes parameters.
+    /// </summary>
+    /// <param name="frequency"></param>
+    /// <returns>
+    /// Frequency is declared elsewhere so there is variety.
+    /// </returns>
 	private AudioClip CreateAudioClip(float frequency)
     {
         int sampleRate = 44100;
@@ -94,11 +110,11 @@ public class Movement : MonoBehaviour
         audioClip.SetData(samples, 0);
         return audioClip;
     }
-	
-    // Creates and initiates a new audio clip everytime the coroutine is ran. There's an if statement so that multiple audio clips
-    // don't overlap each other. Frequency is random between two values so that the footstep sound is different everytime.
-    // Short delay between the sound clips to give a foot step impression.
-	private IEnumerator FootSoundDelay()
+
+    /// <summary>
+    /// Creates and plays a new audio clip with a random frequency after waiting a few seconds.
+    /// </summary>
+    private IEnumerator FootSoundDelay()
     {
 		if (walkSound == true) 
 		{
@@ -111,7 +127,9 @@ public class Movement : MonoBehaviour
 		}
     }
 	
-	// Creates two consecutive sounds with a short delay between both - with different frequencies.
+    /// <summary>
+    /// Creates and plays two consecutive sounds after each other with different frequencys.
+    /// </summary>
 	private IEnumerator HealthSoundDelay()
     {
 		frequency = 700;
