@@ -77,6 +77,9 @@ public class Movement : MonoBehaviour
 		}
         if (other.CompareTag(TAGS.COIN.ToString()))
         {
+            frequency = 1800;
+            outAudioClip = CreateAudioClip(frequency);
+            audioSource.PlayOneShot(outAudioClip);
             Destroy(other.gameObject);
         }
         if (other.CompareTag(TAGS.BULLET.ToString()))

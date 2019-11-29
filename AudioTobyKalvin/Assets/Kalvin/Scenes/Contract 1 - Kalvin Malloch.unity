@@ -1269,6 +1269,7 @@ MonoBehaviour:
   frequency: 400
   secondaryFrequency: 300
   sampleLength: 10000
+  echoNumber: 5
 --- !u!82 &1363426933
 AudioSource:
   m_ObjectHideFlags: 0
