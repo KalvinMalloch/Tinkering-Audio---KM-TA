@@ -11,7 +11,6 @@ using UnityEngine.UI;
 /// Gold Class.
 /// For updating gold user has and playing sounds accordingly.
 /// </summary>
-
 public class Gold : MonoBehaviour
 {
     // Integer that holds current gold
@@ -25,6 +24,9 @@ public class Gold : MonoBehaviour
     // The Text component so we can update the UI showing gold amount
     private Text goldText;
 
+    // The AudioPlayer script is used to play the sounds when an item is bought
+    private AudioPlayer audioPlayerScript;
+
     /// <summary>
     /// Gets the Text component and updates it.
     /// </summary>
@@ -32,8 +34,12 @@ public class Gold : MonoBehaviour
     {
         // Finding the Text component in the "GoldAmount" gameobject
         goldText = GameObject.Find("GoldAmount").GetComponent<Text>();
+
         // Updating the Text so it shows 0 gold
         UpdateText();
+
+        // Finding the AudioPlayer script so we can access it later to play audio
+        audioPlayerScript = GameObject.Find("Canvas").GetComponent<AudioPlayer>();
     }
 
     /// <summary>
@@ -44,8 +50,12 @@ public class Gold : MonoBehaviour
     {
         // Adds the amount of gold
         goldAmount += goldToAdd;
+
         // Updates the Text
         UpdateText();
+
+        // Plays posotive sound to show UI feedback
+        StartCoroutine(audioPlayerScript.PosotiveSound());
     }
 
     /// <summary>
@@ -58,16 +68,19 @@ public class Gold : MonoBehaviour
         {
             // If the user can afford item minus the cost from gold amount
             goldAmount -= amount;
+
             // Update the Text to show the item has been bought
             UpdateText();
 
-            //----------------posotive sound
+            // Plays posotive sound to show item has been bought
+            StartCoroutine(audioPlayerScript.PosotiveSound());
         }
         else
         {
             // Else if user cannot afford item do not change gold
 
-            //-----------------no money sound
+            // Plays negative sound to show nothing has been bought
+            StartCoroutine(audioPlayerScript.NegativeSound());
         }
         
     }
