@@ -25,7 +25,7 @@ of settings should be made available and configurable by a designer.
 
 ##### Instructions
 
-  Open the Unity project called AudioTobyKalvin. When opened, open the folder named Toby and locate the Scenes folder. Open the UIPeerReview scene to view and test my contract. The scripts used can be seen in the Scripts folder inside of the Toby folder.
+  Open the Unity project called AudioTobyKalvin. When opened, open the folder named Toby and locate the Scenes folder. Open the Contract4 scene to view and test my contract. The scripts used can be seen in the Scripts folder inside of the Toby folder.
   
 
 ## License  
