@@ -21,7 +21,7 @@ public class Menus : MonoBehaviour
     void Start()
     {
         // Assinging the game object variables to the correct UI groups in scene
-        title = GameObject.Find("Title");
+        title = GameObject.Find("TitleGroup");
         storeButton = GameObject.Find("StoreButton");
         storeGroup = GameObject.Find("StoreGroup");
         optionsGroup = GameObject.Find("OptionsGroup");
